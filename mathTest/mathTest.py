@@ -27,6 +27,9 @@ class MathTest:
         while index < self._count:
             value1 = random.randint(self._min, self._max)
             value2 = random.randint(self._min, self._max)
+            if value1 % 10 == 0 or value2 % 10 == 0:
+                continue
+
             calcVlue = value1 * value2
 
             result = False

@@ -12,11 +12,12 @@ if not isLinux():
     from windowsColorText import Color
 
 class MathTest:
-    '''乘法计算练习'''
-    _count = 20
-    _max = 99
-    _min = 21
+    '''乘除法计算练习'''
+    _count = 4
+    _max = 10
+    _min = 1
     fileName = 'log.txt'
+    _middle = _count / 2
 
     def run(self):
         index = 0
@@ -30,11 +31,20 @@ class MathTest:
             if value1 % 10 == 0 or value2 % 10 == 0:
                 continue
 
-            calcVlue = value1 * value2
+            calcValue = 0
+            operate = '*'
+            # *
+            if index < self._middle:
+                calcValue = value1 * value2
+            # /
+            else:
+                calcValue = value1
+                value1 = value1 * value2
+                operate = '/'
 
             result = False
             while not result:
-                inputValue = input(f'({index + 1}) {value1}*{value2}=')
+                inputValue = input(f'({index + 1}) {value1}{operate}{value2}=')
                 if inputValue.isdigit():
                     inputValue = int(inputValue)
                 elif inputValue.upper() == 'LOG':
@@ -45,7 +55,7 @@ class MathTest:
                     wrongArray[index] = False
                     continue
 
-                if calcVlue == inputValue:
+                if calcValue == inputValue:
                     self.printGreen('OK')
                     result = True
                 else:
@@ -98,5 +108,9 @@ class MathTest:
             interval = lines[-3].replace(os.linesep, '')
             score = lines[-2].replace(os.linesep, '')
             self.printInfo(time, interval, score)
+
+    def operateDivValue(self, value1, value2):
+        pass
+
 
 MathTest().run()
